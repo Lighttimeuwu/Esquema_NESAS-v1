@@ -1,0 +1,90 @@
+:root {
+  --fondo: #eef2f6;
+  --tarjeta: #ffffff;
+  --tinta: #14232f;
+  --suave: #5b6b78;
+  --linea: #d9e1e8;
+  --primario: #0f766e;
+  --primario-claro: #d5efec;
+  --acento: #d98e04;
+  --malo: #c2410c;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0f1a22;
+    --tarjeta: #172531;
+    --tinta: #e6eef4;
+    --suave: #93a5b3;
+    --linea: #263a49;
+    --primario: #3cc4b6;
+    --primario-claro: #153b3a;
+    --acento: #f0b43c;
+    --malo: #f08a5d;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { height: 100%; }
+body {
+  margin: 0; min-height: 100%;
+  background: var(--fondo); color: var(--tinta);
+  font: 15px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+}
+.cabecera { padding: 28px clamp(16px, 4vw, 48px) 8px; }
+.cabecera h1 { margin: 0; font-size: 1.9rem; letter-spacing: -0.02em; font-weight: 700; }
+.cabecera p { margin: 4px 0 0; color: var(--suave); max-width: 70ch; }
+main { padding: 16px clamp(16px, 4vw, 48px) 48px; display: grid; gap: 18px; }
+
+.zona {
+  display: grid; gap: 4px; justify-items: center; text-align: center;
+  padding: 34px 16px; border: 2px dashed var(--linea); border-radius: 14px;
+  background: var(--tarjeta); cursor: pointer; transition: border-color .15s, background .15s;
+}
+.zona strong { font-size: 1.1rem; }
+.zona span { color: var(--suave); }
+.zona:hover, .zona.sobre, .zona:focus-within { border-color: var(--primario); background: var(--primario-claro); }
+.estado { color: var(--suave); min-height: 1.4em; }
+.estado.error { color: var(--malo); font-weight: 600; }
+.estado ul { margin: 6px 0 0; padding-left: 18px; }
+
+.filtros {
+  display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: end;
+  padding: 14px 16px; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 12px;
+}
+.filtros label { display: grid; gap: 4px; font-size: .85rem; color: var(--suave); }
+.filtros select, .filtros input[type=search] {
+  min-width: 170px; padding: 8px 10px; font: inherit; color: var(--tinta);
+  background: var(--fondo); border: 1px solid var(--linea); border-radius: 8px;
+}
+.filtros select:focus-visible, .filtros input:focus-visible, th:focus-visible { outline: 2px solid var(--primario); outline-offset: 2px; }
+.filtros .check { display: flex; gap: 8px; align-items: center; padding-bottom: 8px; }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 18px 0; }
+.kpi { background: var(--tarjeta); border: 1px solid var(--linea); border-left: 4px solid var(--primario); border-radius: 12px; padding: 14px 16px; }
+.kpi:nth-child(5) { border-left-color: var(--acento); }
+.kpi span { color: var(--suave); font-size: .85rem; }
+.kpi b { display: block; font-size: 1.6rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+.grafs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 12px; padding: 16px; min-width: 0; }
+.tarjeta.ancha { grid-column: span 2; }
+.tarjeta h2 { margin: 0 0 10px; font-size: 1rem; }
+.tarjeta h2 small { color: var(--suave); font-weight: 400; margin-left: 6px; }
+.lienzo { position: relative; height: 260px; }
+.lienzo.alto { height: 340px; }
+
+.tabla-wrap { overflow: auto; max-height: 520px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--linea); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--tarjeta); cursor: pointer; user-select: none; font-size: .85rem; color: var(--suave); }
+th:hover { color: var(--tinta); }
+th.num, td.num { text-align: right; }
+tbody tr:hover { background: var(--primario-claro); }
+.barra { display: inline-block; width: 70px; height: 7px; background: var(--linea); border-radius: 4px; margin-left: 8px; vertical-align: middle; overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--primario); }
+
+@media (max-width: 900px) {
+  .grafs { grid-template-columns: 1fr; }
+  .tarjeta.ancha { grid-column: auto; }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visualizador de recaudo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>Visualizador de recaudo</h1>
+    <p id="subtitulo">Carga tu archivo de informes para ver gestores, equipos y periodos.</p>
+  </header>
+
+  <main>
+    <label id="zona" class="zona" for="archivo">
+      <input type="file" id="archivo" accept=".xlsx,.xlsm,.xls" hidden>
+      <strong>Arrastra tu Excel aquí</strong>
+      <span>o haz clic para elegirlo (.xlsx)</span>
+    </label>
+    <div id="estado" class="estado" role="status"></div>
+
+    <section id="panel" hidden>
+      <div class="filtros">
+        <label>Periodo <select id="fPeriodo"></select></label>
+        <label>Empresa <select id="fEmpresa"></select></label>
+        <label>Equipo <select id="fEquipo"></select></label>
+        <label>Gestor <input id="fBuscar" type="search" placeholder="Nombre o código"></label>
+        <label class="check"><input id="fActivos" type="checkbox" checked> Solo con cartera</label>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="grafs">
+        <article class="tarjeta ancha"><h2>Gestores con mayor recaudo</h2><div class="lienzo alto"><canvas id="gTop"></canvas></div></article>
+        <article class="tarjeta"><h2>Recuperación por equipo</h2><div class="lienzo alto"><canvas id="gEquipo"></canvas></div></article>
+        <article class="tarjeta ancha"><h2>Evolución entre periodos</h2><div class="lienzo"><canvas id="gTend"></canvas></div></article>
+        <article class="tarjeta"><h2>Gestores por nivel de recuperación</h2><div class="lienzo"><canvas id="gNivel"></canvas></div></article>
+      </div>
+
+      <article class="tarjeta">
+        <h2>Detalle de gestores <small id="conteo"></small></h2>
+        <div class="tabla-wrap"><table id="tabla"></table></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
